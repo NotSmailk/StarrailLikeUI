@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0d29da1b5a4d1e439877d570557b388, type: 3}
+  m_Name: GameDataInstaller
+  m_EditorClassIdentifier: 
+  _levelsData: {fileID: 11400000, guid: 1cf24dde356b8eb439ed8e3cf4cc28f1, type: 2}
+  _avatarsData: {fileID: 11400000, guid: f3376f0e365e83944a0676dac5062cb0, type: 2}
+  _usersData: {fileID: 11400000, guid: 00d035bb7ef08e843bc0ffd1bf858de8, type: 2}
+  _squadData: {fileID: 11400000, guid: b2143d8181fdf4643b25fb2361dbb430, type: 2}

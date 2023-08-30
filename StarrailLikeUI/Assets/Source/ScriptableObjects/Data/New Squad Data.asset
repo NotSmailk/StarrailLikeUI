@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5345a5c8aeda504eaf1e615f7272c0f, type: 3}
+  m_Name: New Squad Data
+  m_EditorClassIdentifier: 
+  _squad:
+  - CharacterName: Y Bot
+    CharacterAvatar: {fileID: 21300000, guid: e502631005b4a604c9ee0a7263aa62d8, type: 3}
+    CharacterPrefab: {fileID: 3854288830608138782, guid: 37157df498aa5f949b572c3a43f611c6, type: 3}
+    CharacterUIPrefab: {fileID: 4160277760040394571, guid: 9ea0ba84b9fa96b4d97d8704b7a7bd4d, type: 3}
+  - CharacterName: X Bot
+    CharacterAvatar: {fileID: 21300000, guid: de6c182f67a58664aa2ac3599572821c, type: 3}
+    CharacterPrefab: {fileID: 3689928527441629441, guid: 8b51618f7a8ae684ba766986e80c39ad, type: 3}
+    CharacterUIPrefab: {fileID: 4070852597753138104, guid: cc6bca58554d8624a9119671e7cfd36e, type: 3}
