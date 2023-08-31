@@ -15,8 +15,8 @@ public class CharacterIconView : MonoBehaviour
 
     public void Init(CharacterData character, int id)
     {
-        _characrerIcon.sprite = character.CharacterAvatar;
-        _characterName.text = character.CharacterName;
+        _characrerIcon.sprite = character.Avatar;
+        _characterName.text = character.Name;
         _inputHint.text = $"{id}";
     }
 

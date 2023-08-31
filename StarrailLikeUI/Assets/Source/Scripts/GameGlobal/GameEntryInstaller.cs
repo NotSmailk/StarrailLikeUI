@@ -27,7 +27,10 @@ public class GameEntryInstaller : MonoInstaller
         var userProvider = Container.Instantiate<UserProvider>(new object[] { _username });
         var deviceInfo = Container.Instantiate<DeviceInfoProvider>();
 
+        var characterProvider = Container.Instantiate<CharactersDataProvider>();
+
         Container.Bind<UserProvider>().FromInstance(userProvider).AsSingle().NonLazy();
+        Container.Bind<CharactersDataProvider>().FromInstance(characterProvider).AsSingle().NonLazy();
         Container.Bind<DeviceInfoProvider>().FromInstance(deviceInfo).AsSingle().NonLazy();
     }
 

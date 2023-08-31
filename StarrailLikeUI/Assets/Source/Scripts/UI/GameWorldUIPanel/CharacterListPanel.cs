@@ -7,6 +7,7 @@ public class CharacterListPanel : MonoBehaviour
     [field: SerializeField] private CharacterIconView _iconPrefab;
 
     [Inject] private GameCharacters _gameCharacters;
+    [Inject] private CharactersDataProvider _provider;
 
     private List<CharacterIconView> _icons = new List<CharacterIconView>();
     private CharacterIconView _activeIcon;
@@ -15,8 +16,9 @@ public class CharacterListPanel : MonoBehaviour
     {
         foreach (var item in squad.Squad)
         {
+            var character = _provider.GetCharacter(item);
             var icon = Instantiate(_iconPrefab, transform);
-            icon.Init(item, squad.Squad.IndexOf(item) + 1);
+            icon.Init(character, squad.Squad.IndexOf(item) + 1);
             _icons.Add(icon);
         }
 

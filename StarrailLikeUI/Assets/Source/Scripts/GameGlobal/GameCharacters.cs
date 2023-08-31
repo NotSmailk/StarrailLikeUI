@@ -8,15 +8,17 @@ public class GameCharacters : MonoBehaviour
     private Player _curCharacter;
 
     [Inject] private SquadData _squadData;
+    [Inject] private CharactersDataProvider _provider;
 
     public Player CurCharacter => _curCharacter;
     public int CurIndex => _characters.IndexOf(_curCharacter);
 
     public void Init()
     {
-        foreach (var character in _squadData.Squad)
+        foreach (var id in _squadData.Squad)
         {
-            var player = Instantiate(character.CharacterPrefab, transform);
+            var character = _provider.GetCharacter(id);
+            var player = Instantiate(character.Prefab, transform);
             _characters.Add(player);
             player.gameObject.SetActive(false);
         }

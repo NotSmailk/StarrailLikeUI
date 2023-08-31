@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelsData: {fileID: 11400000, guid: 1cf24dde356b8eb439ed8e3cf4cc28f1, type: 2}
   _avatarsData: {fileID: 11400000, guid: f3376f0e365e83944a0676dac5062cb0, type: 2}
-  _usersData: {fileID: 11400000, guid: 00d035bb7ef08e843bc0ffd1bf858de8, type: 2}
-  _squadData: {fileID: 11400000, guid: b2143d8181fdf4643b25fb2361dbb430, type: 2}
+  _squadData: {fileID: 11400000, guid: 2f8810f1fb6ed0a4786d66ea14fb263a, type: 2}

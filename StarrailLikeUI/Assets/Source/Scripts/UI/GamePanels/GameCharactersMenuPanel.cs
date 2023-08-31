@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,7 +8,10 @@ using Zenject;
 
 public class GameCharactersMenuPanel : MonoBehaviour, IGameMenuPanel
 {
-    [field: SerializeField] private CharacterViewList _characterViewList;
+    [field: SerializeField] private CharactersMenuTypeList _charactersMenuTypeList;
+    [field: SerializeField] private CharacterViewChooseList _characterViewList;
+    [field: SerializeField] private CharactersMenuInfoPanel _charactersMenuInfoPanel;
+    [field: SerializeField] private CharactersMenuSkillsPanel _charactersMenuSkillsPanel;
     [field: SerializeField] private RectTransform _panelRect;
     [field: SerializeField] private Transform _viewpoint;
     [field: SerializeField] private Image _panelImg;
@@ -15,19 +19,42 @@ public class GameCharactersMenuPanel : MonoBehaviour, IGameMenuPanel
 
     [Inject] private GameStateMachine _gameBehaviour;
     [Inject] private SquadData _squadData;
+    [Inject] private CharactersDataProvider _provider;
 
     private float _alpha;
-    private List<GameObject> _characters = new List<GameObject>();
-    private GameObject _selectedCharacter;
+    private List<CharacterUIView> _characters = new List<CharacterUIView>();
+    private Dictionary<Type, ICharactersMenuPanel> _panels = new Dictionary<Type, ICharactersMenuPanel>();
+    private CharacterUIView _selectedCharacter;
+    private ICharactersMenuPanel _curPanel;
     private Color _defaultColor;
 
     public void Init()
     {
+        _panels.Add(_charactersMenuInfoPanel.GetType(), _charactersMenuInfoPanel);
+        _panels.Add(_charactersMenuSkillsPanel.GetType(), _charactersMenuSkillsPanel);
+        foreach (var panel in _panels.Values)
+            panel.Show(false);
+
+        _charactersMenuTypeList.AddCharacterInfo(() => ShowMenu<CharactersMenuInfoPanel>(true));
+        _charactersMenuTypeList.AddCharacterSkills(() => ShowMenu<CharactersMenuSkillsPanel>(true));
+
         _closeButton.onClick.AddListener(_gameBehaviour.SwitchToPreviousState);
         _defaultColor = _panelImg.color;
         _alpha = _defaultColor.a;
         _panelRect.gameObject.SetActive(false);
         _characterViewList.Init(SetActivePlayer, _squadData);
+        _curPanel = _panels[_charactersMenuInfoPanel.GetType()];
+        _curPanel.Show(true);
+    }
+
+    private void ShowMenu<TCharactersMenu>(bool show) where TCharactersMenu : ICharactersMenuPanel
+    {
+        if (_panels[typeof(TCharactersMenu)].Equals(_curPanel))
+            return;
+
+        _curPanel.Show(false);
+        _curPanel = _panels.GetValueOrDefault(typeof(TCharactersMenu));
+        _curPanel.Show(show);
     }
 
     private void SetActivePlayer(int id)
@@ -39,10 +66,12 @@ public class GameCharactersMenuPanel : MonoBehaviour, IGameMenuPanel
             return;
 
         foreach (var character in _characters)
-            character.SetActive(false);
+            character.Show(false);
 
         _selectedCharacter = _characters[id];
-        _characters[id].SetActive(true);
+        _charactersMenuInfoPanel.SetActiveCharacter(_selectedCharacter);
+        _charactersMenuSkillsPanel.SetActiveCharacter(_selectedCharacter);
+        _characters[id].Show(true);
     }
 
     public void ShowPanelForce(bool show)
@@ -72,9 +101,11 @@ public class GameCharactersMenuPanel : MonoBehaviour, IGameMenuPanel
 
     private void CreateCharacters()
     {
-        foreach (var character in _squadData.Squad)
+        foreach (var id in _squadData.Squad)
         {
-            var player = Instantiate(character.CharacterUIPrefab, _viewpoint);
+            var character = _provider.GetCharacter(id);
+            var player = Instantiate(character.UIPrefab, _viewpoint);
+            player.Init(character.Name, character.Description, character.Skills);
             _characters.Add(player);
         }
         SetActivePlayer(0);
@@ -96,7 +127,7 @@ public class GameCharactersMenuPanel : MonoBehaviour, IGameMenuPanel
     {
         foreach (var character in _characters)
         {
-            Destroy(character);
+            Destroy(character.gameObject);
         }
         _characters.Clear();
     }
