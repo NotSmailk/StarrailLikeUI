@@ -14,25 +14,26 @@ public class GameStateMachine : MonoBehaviour
 
     public void Init()
     {
-        _states.Add(typeof(GameWorldState), Create<GameWorldState>());
-        _states.Add(typeof(GamePhoneMenuState), Create<GamePhoneMenuState>());
-        _states.Add(typeof(GameStoreMenuState), Create<GameStoreMenuState>());
-        _states.Add(typeof(GameFriendsMenuState), Create<GameFriendsMenuState>());
-        _states.Add(typeof(GameAssignementsMenuState), Create<GameAssignementsMenuState>());
-        _states.Add(typeof(GameInventoryState), Create<GameInventoryState>());
-        _states.Add(typeof(GameSpinsMenuState), Create<GameSpinsMenuState>());
-        _states.Add(typeof(GameCharactersMenuState), Create<GameCharactersMenuState>());
+        CreateAndAddState<GameWorldState>();
+        CreateAndAddState<GamePhoneMenuState>();
+        CreateAndAddState<GameStoreMenuState>();
+        CreateAndAddState<GameFriendsMenuState>();
+        CreateAndAddState<GameAssignementsMenuState>();
+        CreateAndAddState<GameInventoryState>();
+        CreateAndAddState<GameSpinsMenuState>();
+        CreateAndAddState<GameCharactersMenuState>();
 
         _curState = _states[typeof(GameWorldState)];
         if (_curState is IStateEnterable enterable)
             enterable.Enter();
     }
 
-    public TGameState Create<TGameState>() where TGameState : class, IGameState
+    private TGameState CreateAndAddState<TGameState>() where TGameState : class, IGameState
     {
         var state = _container.Instantiate<TGameState>();
         state.Initializer = this;
         _container.BindInterfacesAndSelfTo<TGameState>().FromInstance(state);
+        _states.Add(typeof(TGameState), state);
         return state;
     }
 

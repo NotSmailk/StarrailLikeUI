@@ -30,21 +30,37 @@ public class GameCharactersMenuPanel : MonoBehaviour, IGameMenuPanel
 
     public void Init()
     {
+        InitSubPanels();
+
+        InitMenuTypes();
+
+        InitMainPanel();
+    }
+
+    private void InitSubPanels()
+    {
         _panels.Add(_charactersMenuInfoPanel.GetType(), _charactersMenuInfoPanel);
         _panels.Add(_charactersMenuSkillsPanel.GetType(), _charactersMenuSkillsPanel);
         foreach (var panel in _panels.Values)
             panel.Show(false);
 
+        _curPanel = _panels[_charactersMenuInfoPanel.GetType()];
+        _curPanel.Show(true);
+    }
+
+    private void InitMenuTypes()
+    {
         _charactersMenuTypeList.AddCharacterInfo(() => ShowMenu<CharactersMenuInfoPanel>(true));
         _charactersMenuTypeList.AddCharacterSkills(() => ShowMenu<CharactersMenuSkillsPanel>(true));
+    }
 
+    private void InitMainPanel()
+    {
         _closeButton.onClick.AddListener(_gameBehaviour.SwitchToPreviousState);
         _defaultColor = _panelImg.color;
         _alpha = _defaultColor.a;
         _panelRect.gameObject.SetActive(false);
         _characterViewList.Init(SetActivePlayer, _squadData);
-        _curPanel = _panels[_charactersMenuInfoPanel.GetType()];
-        _curPanel.Show(true);
     }
 
     private void ShowMenu<TCharactersMenu>(bool show) where TCharactersMenu : ICharactersMenuPanel
