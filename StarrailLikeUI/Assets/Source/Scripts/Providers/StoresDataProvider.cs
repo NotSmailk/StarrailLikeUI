@@ -6,7 +6,7 @@ public class StoresDataProvider
 
     public StoresDataProvider()
     {
-        _stores = Resources.LoadAll<StoreData>("StoreData/");
+        _stores = Resources.LoadAll<StoreData>(GameConstants.Paths.STORE_PATH);
     }
 
     public StoreData[] Stores => _stores;

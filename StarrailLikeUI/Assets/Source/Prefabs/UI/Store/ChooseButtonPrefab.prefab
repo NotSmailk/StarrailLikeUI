@@ -93,7 +93,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.25
+  m_fontSize: 18
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -146,10 +146,9 @@ GameObject:
   - component: {fileID: 1773984127460331152}
   - component: {fileID: 1773984127460331164}
   - component: {fileID: 1773984127460331165}
-  - component: {fileID: 1773984127460331154}
-  - component: {fileID: 1773984127460331155}
+  - component: {fileID: 4034473652618629924}
   m_Layer: 5
-  m_Name: StoreChoose
+  m_Name: ChooseButtonPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -214,7 +213,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1773984127460331154
+--- !u!114 &4034473652618629924
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -223,55 +222,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1773984127460331153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 814579d7b0546ff449a0a269393fba57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1773984127460331165}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1773984127460331155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773984127460331153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ba79fc1adde4d342b3ee9ac7cd34c90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _buttonType: 2
-  enterSizeCoef: 0.1
-  clickSizeCoef: 0.15
-  enterColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
-  clickColor: {r: 0.25, g: 0.25, b: 0.25, a: 1}
+  _image: {fileID: 1773984127460331165}
+  _rect: {fileID: 1773984127460331152}
+  _duration: 0.1
+  _enterSizeCoef: 0.1
+  _clickSizeCoef: 0.15
+  _enterColor: {r: 0.25, g: 0.25, b: 0.25, a: 1}
+  _clickColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}

@@ -1,34 +1,27 @@
-using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
-public class GameCharactersMenuPanel : MonoBehaviour, IGameMenuPanel
+public class GameCharactersMenuPanel : VanishingGamePanel
 {
     [field: SerializeField] private CharactersMenuTypeList _charactersMenuTypeList;
     [field: SerializeField] private CharacterViewChooseList _characterViewList;
     [field: SerializeField] private CharactersMenuInfoPanel _charactersMenuInfoPanel;
     [field: SerializeField] private CharactersMenuSkillsPanel _charactersMenuSkillsPanel;
-    [field: SerializeField] private RectTransform _panelRect;
     [field: SerializeField] private Transform _viewpoint;
-    [field: SerializeField] private Image _panelImg;
-    [field: SerializeField] private Button _closeButton;
 
     [Inject] private GameStateMachine _gameBehaviour;
     [Inject] private SquadData _squadData;
     [Inject] private CharactersDataProvider _provider;
 
-    private float _alpha;
     private List<CharacterUIView> _characters = new List<CharacterUIView>();
     private Dictionary<Type, ICharactersMenuPanel> _panels = new Dictionary<Type, ICharactersMenuPanel>();
     private CharacterUIView _selectedCharacter;
     private ICharactersMenuPanel _curPanel;
-    private Color _defaultColor;
 
-    public void Init()
+    public override void Init()
     {
         InitSubPanels();
 
@@ -50,6 +43,7 @@ public class GameCharactersMenuPanel : MonoBehaviour, IGameMenuPanel
 
     private void InitMenuTypes()
     {
+        _charactersMenuTypeList.Init();
         _charactersMenuTypeList.AddCharacterInfo(() => ShowMenu<CharactersMenuInfoPanel>(true));
         _charactersMenuTypeList.AddCharacterSkills(() => ShowMenu<CharactersMenuSkillsPanel>(true));
     }
@@ -90,29 +84,10 @@ public class GameCharactersMenuPanel : MonoBehaviour, IGameMenuPanel
         _characters[id].Show(true);
     }
 
-    public void ShowPanelForce(bool show)
+    public override async Task ShowPanel(float duration)
     {
-        _panelRect.gameObject.SetActive(show);
-    }
-
-    public async Task ShowPanel(bool show, float duration)
-    {
-        if (show)
-            await ShowPanel(duration);
-        else
-            await HidePanel(duration);
-    }
-
-    public async Task ShowPanel(float duration)
-    {
-        _panelRect.gameObject.SetActive(true);
         CreateCharacters();
-        _panelImg.color = _panelImg.color * new Color(1, 1, 1, 0);
-        float alpha = _alpha;
-        var color = _defaultColor * new Color(1, 1, 1, alpha);
-
-        _panelImg.DOColor(color, duration);
-        await Task.Delay((int)(duration * 1000));
+        await base.ShowPanel(duration);
     }
 
     private void CreateCharacters()
@@ -127,16 +102,10 @@ public class GameCharactersMenuPanel : MonoBehaviour, IGameMenuPanel
         SetActivePlayer(0);
     }
 
-    public async Task HidePanel(float duration)
+    public override async Task HidePanel(float duration)
     {
-        _panelImg.color = _defaultColor;
-        float alpha = 0;
-        var color = _defaultColor * new Color(1, 1, 1, alpha); 
         DestroyCharacters();
-
-        _panelImg.DOColor(color, duration / 4);
-        await Task.Delay((int)(duration * 1000));
-        _panelRect.gameObject.SetActive(false);
+        await base.HidePanel(duration);
     }
 
     private void DestroyCharacters()

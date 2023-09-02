@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -22,8 +23,9 @@ public class AnimatedButtonBorders : MonoBehaviour, IPointerEnterHandler, IPoint
         defaultColor = _image.color;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {        
+    public async void OnPointerClick(PointerEventData eventData)
+    {
+        _image.maskable = false;
         var size = defaultSize * (1 + clickSizeCoef);
 
         switch (_buttonType)
@@ -47,10 +49,14 @@ public class AnimatedButtonBorders : MonoBehaviour, IPointerEnterHandler, IPoint
                     Append(_image.DOColor(defaultColor, 0.05f));
                 break;
         }
+
+        await Task.Delay(100);
+        _image.maskable = true;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        _image.maskable = false;
         var size = _rect.sizeDelta * (1 + enterSizeCoef);
 
         switch (_buttonType)
@@ -68,7 +74,7 @@ public class AnimatedButtonBorders : MonoBehaviour, IPointerEnterHandler, IPoint
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public async void OnPointerExit(PointerEventData eventData)
     {
         switch (_buttonType)
         {
@@ -83,10 +89,13 @@ public class AnimatedButtonBorders : MonoBehaviour, IPointerEnterHandler, IPoint
                 _image.DOColor(defaultColor, 0.1f);
                 break;
         }
+        await Task.Delay(100);
+        _image.maskable = true;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        _image.maskable = false;
         var size = defaultSize * (1 + clickSizeCoef);
 
         switch (_buttonType)

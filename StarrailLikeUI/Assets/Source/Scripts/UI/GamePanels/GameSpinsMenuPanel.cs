@@ -1,60 +1,42 @@
-using DG.Tweening;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
-public class GameSpinsMenuPanel : MonoBehaviour, IGameMenuPanel
+public class GameSpinsMenuPanel : VanishingGamePanel
 {
-    [field: SerializeField] private RectTransform _panelRect;
-    [field: SerializeField] private Image _panelImg;
-    [field: SerializeField] private Button _closeButton;
+    [field: SerializeField] private SpinChooseTypeList _spinChooseTypeList;
+    [field: SerializeField] private SpinInfoPanelList _spinInfoPanelList;
 
     [Inject] private GameStateMachine _gameBehaviour;
+    [Inject] private SpinsDataProvider _spinProvider;
 
-    private float _alpha;
-    private Color _defaultColor;
-
-    public void Init()
+    public override void Init()
     {
         _closeButton.onClick.AddListener(_gameBehaviour.SwitchToPreviousState);
-        _defaultColor = _panelImg.color;
-        _alpha = _defaultColor.a;
-        _panelRect.gameObject.SetActive(false);
+        base.Init();
     }
 
-    public void ShowPanelForce(bool show)
+    public override async Task ShowPanel(float duration)
     {
-        _panelRect.gameObject.SetActive(show);
+        CreatePanel();
+        await base.ShowPanel(duration);
     }
 
-    public async Task ShowPanel(bool show, float duration)
+    public override async Task HidePanel(float duration)
     {
-        if (show)
-            await ShowPanel(duration);
-        else
-            await HidePanel(duration);
+        ClearPanel();
+        await base.HidePanel(duration);
     }
 
-    public async Task ShowPanel(float duration)
+    public async void CreatePanel()
     {
-        _panelRect.gameObject.SetActive(true);
-        _panelImg.color = _panelImg.color * new Color(1, 1, 1, 0);
-        float alpha = _alpha;
-        var color = _defaultColor * new Color(1, 1, 1, alpha);
-
-        _panelImg.DOColor(color, duration);
-        await Task.Delay((int)(duration * 1000));
+        _spinChooseTypeList.CreateButtons(_spinProvider.SpinsData, async (int id) => { await _spinInfoPanelList.ShowPanel(id); });
+        _spinInfoPanelList.CreatePanels(_spinProvider.SpinsData);
     }
 
-    public async Task HidePanel(float duration)
+    public void ClearPanel()
     {
-        _panelImg.color = _defaultColor;
-        float alpha = 0;
-        var color = _defaultColor * new Color(1, 1, 1, alpha);
-
-        _panelImg.DOColor(color, duration / 4);
-        await Task.Delay((int)(duration * 1000));
-        _panelRect.gameObject.SetActive(false);
+        _spinChooseTypeList.Clear();
+        _spinInfoPanelList.Clear();
     }
 }

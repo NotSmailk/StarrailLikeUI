@@ -1,19 +1,33 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
-public class CharactersMenuTypeList : MonoBehaviour
+public class CharactersMenuTypeList : ChooseTypeListPanel
 {
-    [field: SerializeField] private Button _characterInfoBtn;
-    [field: SerializeField] private Button _characterSkillsBtn;
+    [field: SerializeField] private ChooseTypeButton _characterInfoBtn;
+    [field: SerializeField] private ChooseTypeButton _characterSkillsBtn;
+
+    public void Init()
+    {
+        _buttons.Add(_characterInfoBtn);
+        _buttons.Add(_characterSkillsBtn);
+
+        _characterInfoBtn.Init();
+        _characterSkillsBtn.Init();
+
+        _characterInfoBtn.Add(() => { ChooseButton(_characterInfoBtn); });
+        _characterSkillsBtn.Add(() => { ChooseButton(_characterSkillsBtn); });
+
+        ChooseButton(_characterInfoBtn);
+    }
 
     public void AddCharacterInfo(UnityAction action)
     {
-        _characterInfoBtn.onClick.AddListener(action);
+        _characterInfoBtn.Add(action);
     }
     
     public void AddCharacterSkills(UnityAction action)
     {
-        _characterSkillsBtn.onClick.AddListener(action);
+        _characterSkillsBtn.Add(action);
     }
 }

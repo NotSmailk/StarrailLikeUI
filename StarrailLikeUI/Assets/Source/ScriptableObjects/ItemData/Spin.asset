@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Spin
   m_EditorClassIdentifier: 
   _name: Spin
-  _sprite: {fileID: 21300000, guid: 3494dc956dfd7174abc07060940a2848, type: 3}
+  _sprite: {fileID: 21300000, guid: c5ab837ba4a09324c8509f448e3980cb, type: 3}
   _description: Can be used in spins menu

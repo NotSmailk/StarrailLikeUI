@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da2a5c22a2352ec41a8929d103ae1ac9, type: 3}
+  m_Name: New Spins Data
+  m_EditorClassIdentifier: 
+  _datas:
+  - {fileID: 11400000, guid: bbaa9fa13e0eaa941b66630b6ae5f341, type: 2}
+  - {fileID: 11400000, guid: e91e78a6b5d863d49abf22fb9f96171c, type: 2}
