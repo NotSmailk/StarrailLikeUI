@@ -1,4 +1,6 @@
-﻿[System.Serializable]
+﻿using System.Collections.Generic;
+
+[System.Serializable]
 public class UserData
 {
     public string username = "Default";
@@ -7,4 +9,5 @@ public class UserData
     public string status = "Status";
     public int level = 0;
     public int expCount = 0;
+    public List<string> friendsList = new List<string>();
 }

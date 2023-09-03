@@ -8,15 +8,19 @@ public class UserProvider
     public UserProvider(string username)
     {
         _username = username;
+        
+        _users = Resources.Load("New Users Data") as UsersData;
     }
 
     public UserData User => GetUser();
 
+    public UserData GetUserByUID(string uid)
+    {
+        return _users.GetUserByUID(uid);
+    }
+
     private UserData GetUser()
     {
-        if (_users == null)
-            _users = Resources.Load("New Users Data") as UsersData;
-
         return _users.GetUser(_username);
     }
 }

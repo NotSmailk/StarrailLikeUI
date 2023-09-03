@@ -27,7 +27,7 @@ public class CharacterViewChooseList : MonoBehaviour
         ChooseCharacter(0);
     }
 
-    private void ChooseCharacter(int id)
+    public void ChooseCharacter(int id)
     {
         if (_buttons.TryGetValue(id, out CharacterSelectButton button))
         {

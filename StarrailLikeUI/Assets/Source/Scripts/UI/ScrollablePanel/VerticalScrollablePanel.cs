@@ -27,6 +27,8 @@ public class VerticalScrollablePanel : MonoBehaviour, IScrollablePanel
     {
         try
         {
+            var startYValue = type.Equals(PanelAnimationType.Up) ? _yValueUp : _yValueDown;
+            _rect.anchoredPosition = new Vector2(_rect.anchoredPosition.x, startYValue);
             _rect.gameObject.SetActive(true);
             var yValue = _yValueShowed;
             var pos = new Vector2(_rect.anchoredPosition.x, yValue);

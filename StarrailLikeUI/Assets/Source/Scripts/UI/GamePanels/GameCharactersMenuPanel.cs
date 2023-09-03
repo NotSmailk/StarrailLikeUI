@@ -100,6 +100,7 @@ public class GameCharactersMenuPanel : VanishingGamePanel
             _characters.Add(player);
         }
         SetActivePlayer(0);
+        _characterViewList.ChooseCharacter(0);
     }
 
     public override async Task HidePanel(float duration)

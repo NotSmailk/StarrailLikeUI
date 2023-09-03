@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: New Avatars Data
   m_EditorClassIdentifier: 
   _avatars:
-  - {fileID: 21300000, guid: da545229eea36164d8b8cba2f75a1143, type: 3}
-  - {fileID: 21300000, guid: 0ac55f9f886d827408c102bdf33c5ff7, type: 3}
+  - {fileID: 21300000, guid: de6c182f67a58664aa2ac3599572821c, type: 3}
+  - {fileID: 21300000, guid: e502631005b4a604c9ee0a7263aa62d8, type: 3}

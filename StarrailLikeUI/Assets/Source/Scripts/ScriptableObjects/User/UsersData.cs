@@ -18,4 +18,15 @@ public class UsersData : ScriptableObject
 
         return null;
     }
+
+    public UserData GetUserByUID(string uid)
+    {
+        foreach (var item in _data)
+        {
+            if (item.uid.Equals(uid))
+                return item;
+        }
+
+        return null;
+    }
 }

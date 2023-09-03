@@ -25,17 +25,22 @@ public class GameEntryInstaller : MonoInstaller
     private void BindProviders()
     {
         var userProvider = Container.Instantiate<UserProvider>(new object[] { _username });
+        Container.Bind<UserProvider>().FromInstance(userProvider).AsSingle().NonLazy();
+
         var deviceInfo = Container.Instantiate<DeviceInfoProvider>();
+        Container.Bind<DeviceInfoProvider>().FromInstance(deviceInfo).AsSingle().NonLazy();
+
         var storeProvider = Container.Instantiate<StoresDataProvider>();
+        Container.Bind<StoresDataProvider>().FromInstance(storeProvider).AsSingle().NonLazy();
+
         var spinsProvider = Container.Instantiate<SpinsDataProvider>();
+        Container.Bind<SpinsDataProvider>().FromInstance(spinsProvider).AsSingle().NonLazy();
 
         var characterProvider = Container.Instantiate<CharactersDataProvider>();
-
-        Container.Bind<UserProvider>().FromInstance(userProvider).AsSingle().NonLazy();
         Container.Bind<CharactersDataProvider>().FromInstance(characterProvider).AsSingle().NonLazy();
-        Container.Bind<DeviceInfoProvider>().FromInstance(deviceInfo).AsSingle().NonLazy();
-        Container.Bind<StoresDataProvider>().FromInstance(storeProvider).AsSingle().NonLazy();
-        Container.Bind<SpinsDataProvider>().FromInstance(spinsProvider).AsSingle().NonLazy();
+
+        var friendsProvider = new FriendsDataProvider(userProvider);
+        Container.Bind<FriendsDataProvider>().FromInstance(friendsProvider).AsSingle().NonLazy();
     }
 
     private void BindCharacters()

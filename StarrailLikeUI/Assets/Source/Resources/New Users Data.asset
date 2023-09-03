@@ -19,9 +19,33 @@ MonoBehaviour:
     status: Default status
     level: 0
     expCount: 10
+    friendsList:
+    - 999999999
   - username: Test
     uid: 999999999
     avatarId: 1
     status: Test status
     level: 3
     expCount: 350
+    friendsList:
+    - 000000000
+    - 111111111
+    - 222222222
+  - username: NotSmailk
+    uid: 111111111
+    avatarId: 1
+    status: Show me your motivation
+    level: 4
+    expCount: 470
+    friendsList:
+    - 999999999
+    - 222222222
+  - username: Chihlepih
+    uid: 222222222
+    avatarId: 1
+    status: Blade from samuro
+    level: 5
+    expCount: 530
+    friendsList:
+    - 111111111
+    - 999999999
