@@ -21,6 +21,9 @@ MonoBehaviour:
     expCount: 10
     friendsList:
     - 999999999
+    inventory:
+    - ItemId: 0
+      Quantity: 1
   - username: Test
     uid: 999999999
     avatarId: 1
@@ -31,6 +34,14 @@ MonoBehaviour:
     - 000000000
     - 111111111
     - 222222222
+    - 333333333
+    inventory:
+    - ItemId: 0
+      Quantity: 1
+    - ItemId: 1
+      Quantity: 2
+    - ItemId: 2
+      Quantity: 2
   - username: NotSmailk
     uid: 111111111
     avatarId: 1
@@ -40,6 +51,11 @@ MonoBehaviour:
     friendsList:
     - 999999999
     - 222222222
+    inventory:
+    - ItemId: 0
+      Quantity: 1
+    - ItemId: 1
+      Quantity: 1
   - username: Chihlepih
     uid: 222222222
     avatarId: 1
@@ -49,3 +65,17 @@ MonoBehaviour:
     friendsList:
     - 111111111
     - 999999999
+    inventory:
+    - ItemId: 0
+      Quantity: 1
+  - username: Steranor
+    uid: 333333333
+    avatarId: 2
+    status: ...
+    level: 5
+    expCount: 510
+    friendsList:
+    - 999999999
+    inventory:
+    - ItemId: 0
+      Quantity: 1

@@ -39,6 +39,9 @@ public class GameEntryInstaller : MonoInstaller
         var characterProvider = Container.Instantiate<CharactersDataProvider>();
         Container.Bind<CharactersDataProvider>().FromInstance(characterProvider).AsSingle().NonLazy();
 
+        var itemDataCollection = Container.Instantiate<ItemCollectionProvider>();
+        Container.Bind<ItemCollectionProvider>().FromInstance(itemDataCollection).AsSingle().NonLazy();
+
         var friendsProvider = new FriendsDataProvider(userProvider);
         Container.Bind<FriendsDataProvider>().FromInstance(friendsProvider).AsSingle().NonLazy();
     }

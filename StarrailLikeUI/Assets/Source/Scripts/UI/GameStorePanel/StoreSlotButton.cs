@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class StoreSlotButton : MonoBehaviour
@@ -10,11 +11,16 @@ public class StoreSlotButton : MonoBehaviour
     [field: SerializeField] private Image _spriteImg;
     [field: SerializeField] private Button _button;
 
-    public void Init(StoreItemData data, int quantity)
+    public void Init(ItemData data, int price, int quantity)
     {
-        _nameText.text = data.Item.Name;
-        _costText.text = data.Price.ToString();
+        _nameText.text = data.Name;
+        _costText.text = price.ToString();
         _quantityText.text = quantity.ToString();
-        _spriteImg.sprite = data.Item.Sprite;
+        _spriteImg.sprite = data.Sprite;
+    }
+
+    public void Add(UnityAction action)
+    {
+        _button.onClick.AddListener(action);
     }
 }

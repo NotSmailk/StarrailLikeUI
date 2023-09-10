@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class AnimatedButtonBorders : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
+    [field: Header("Animation Parametres")]
     [field: SerializeField] private AnimatedButtonType _buttonType = AnimatedButtonType.Size;
     [field: SerializeField] private RectTransform _rect;
     [field: SerializeField] private Image _image;

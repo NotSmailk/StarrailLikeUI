@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f0e31c05cc7b444a894d84bd75614dc, type: 3}
   m_Name: SpinSlot
   m_EditorClassIdentifier: 
-  _item: {fileID: 11400000, guid: a1e446e530c0f074a90e75af5733cef0, type: 2}
+  _itemId: 2
   _price: 20

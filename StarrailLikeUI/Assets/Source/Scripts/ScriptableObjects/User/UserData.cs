@@ -10,4 +10,10 @@ public class UserData
     public int level = 0;
     public int expCount = 0;
     public List<string> friendsList = new List<string>();
+    public List<InventoryInfo> inventory = new List<InventoryInfo>();
+
+    public void AddItem(int id, int quantity)
+    {
+        inventory.AddItem(id, quantity);
+    }
 }

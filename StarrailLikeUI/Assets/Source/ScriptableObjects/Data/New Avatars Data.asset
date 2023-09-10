@@ -15,3 +15,4 @@ MonoBehaviour:
   _avatars:
   - {fileID: 21300000, guid: de6c182f67a58664aa2ac3599572821c, type: 3}
   - {fileID: 21300000, guid: e502631005b4a604c9ee0a7263aa62d8, type: 3}
+  - {fileID: 21300000, guid: 3f4abed032d839e4d8831286c6792d92, type: 3}

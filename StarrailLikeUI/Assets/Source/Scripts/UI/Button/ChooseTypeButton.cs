@@ -6,20 +6,21 @@ using UnityEngine.UI;
 
 public class ChooseTypeButton : AnimatedChooseButton
 {
-    [field: SerializeField] private Image _image;
-    [field: SerializeField] private RectTransform _rect;
+    [field: Header("Animation Parametres")]
+    [field: SerializeField] protected Image _image;
+    [field: SerializeField] protected RectTransform _rect;
     [field: SerializeField] private float _duration;
     [field: SerializeField] private float _enterSizeCoef = 0.1f;
     [field: SerializeField] private float _clickSizeCoef = 0.15f;
     [field: SerializeField] private Color _enterColor = Color.gray;
     [field: SerializeField] private Color _clickColor = Color.gray;
 
-    private Vector2 _defaultSize;
-    private Color _defaultColor;
-    private bool _isSelected = false;
-    private UnityEvent _onClick = new UnityEvent();
+    protected Vector2 _defaultSize;
+    protected Color _defaultColor;
+    protected bool _isSelected = false;
+    protected UnityEvent _onClick = new UnityEvent();
 
-    public void Init()
+    public virtual void Init()
     {
         _defaultSize = GetComponent<RectTransform>().sizeDelta;
         _defaultColor = _image.color;

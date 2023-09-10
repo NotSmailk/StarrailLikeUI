@@ -29,3 +29,11 @@ MonoBehaviour:
     Skills: '- Has a mesh
 
       - X Bot'
+  - Name: Victor
+    Avatar: {fileID: 21300000, guid: 3f4abed032d839e4d8831286c6792d92, type: 3}
+    Prefab: {fileID: 407324394346909883, guid: 93e54d4a50fbc07458055b8155af03d3, type: 3}
+    UIPrefab: {fileID: 4889962887465012955, guid: 9efa87c00519c234e91d803ed2d5be50, type: 3}
+    Description: Mannequin model from mixamo.com
+    Skills: '- Has a mesh
+
+      - Victor'

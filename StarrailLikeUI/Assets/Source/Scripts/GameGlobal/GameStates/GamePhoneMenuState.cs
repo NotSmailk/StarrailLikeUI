@@ -18,8 +18,7 @@ public class GamePhoneMenuState : IGameState, IStateEnterable, IStateExitable
 
     public async Task Enter()
     {
-        //if (!_camera.CameraTransform.position.Equals(_characters.CurCharacter.PhoneViewPoint.position))
-        if (Initializer.PrevState.GetType() == typeof(GameWorldState))
+        if (Initializer.PrevState?.GetType() == typeof(GameWorldState))
         {
             Vector3 middle = _characters.CurCharacter.PhoneViewPoint.position - _characters.CurCharacter.PhoneViewPoint.forward;
             _camera.SetPositionAndRotation(

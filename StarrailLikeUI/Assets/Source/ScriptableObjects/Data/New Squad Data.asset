@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa8e16cbb7f7bc458ecdcf011a83093, type: 3}
   m_Name: New Squad Data
   m_EditorClassIdentifier: 
-  _squad: 0000000001000000
+  _squad: 000000000100000002000000

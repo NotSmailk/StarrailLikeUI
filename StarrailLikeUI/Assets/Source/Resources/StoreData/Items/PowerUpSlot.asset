@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f0e31c05cc7b444a894d84bd75614dc, type: 3}
   m_Name: PowerUpSlot
   m_EditorClassIdentifier: 
-  _item: {fileID: 11400000, guid: e3ff7e9031f21a848932185d8449f061, type: 2}
+  _itemId: 1
   _price: 10

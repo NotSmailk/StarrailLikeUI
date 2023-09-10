@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class AnimatedButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private Vector2 defaultSize;
     private RectTransform rect;
     private Image image;
+    private UnityEvent _onClick = new UnityEvent();
 
     private void Awake()
     {
@@ -25,9 +27,20 @@ public class AnimatedButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         defaultColor = image.color;
     }
 
+    public void Add(UnityAction action)
+    {
+        _onClick.AddListener(action);
+    }
+
+    public void RemoveAll()
+    {
+        _onClick.RemoveAllListeners();
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {        
         var size = defaultSize * (1 + clickSizeCoef);
+        _onClick.Invoke();
 
         switch (_buttonType)
         {
@@ -90,21 +103,7 @@ public class AnimatedButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        var size = defaultSize * (1 + clickSizeCoef);
-
-        switch (_buttonType)
-        {
-            case AnimatedButtonType.Size:
-                rect.DOSizeDelta(size, 0.05f);
-                break;
-            case AnimatedButtonType.Color:
-                image.DOColor(clickColor, 0.05f);
-                break;
-            case AnimatedButtonType.ColorAndSize:
-                rect.DOSizeDelta(size, 0.05f);
-                image.DOColor(clickColor, 0.05f);
-                break;
-        }
+        OnPointerEnter(eventData);
     }
 
     public void OnPointerUp(PointerEventData eventData)

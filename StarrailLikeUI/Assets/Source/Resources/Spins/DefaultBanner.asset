@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50824d5022a47bb48be29f30b4b5d6f5, type: 3}
-  m_Name: YBotSpinRerunData
+  m_Name: DefaultBanner
   m_EditorClassIdentifier: 
-  _name: Y Bot limited banner rerun
-  _shortName: Y Bot Rerun
-  _description: You can get a limited-time character Y Bot via spinning this banner
-  _sprite: {fileID: 21300000, guid: 88d282e5479ed0b45bccf54c0b9ff202, type: 3}
+  _name: Default Banner
+  _shortName: Default
+  _description: This is default banner where you can get some characters such as
+    "X Bot", "Y Bot", "Victor"
+  _sprite: {fileID: 21300000, guid: afa69066425ceda4e8e141f7d73b7557, type: 3}

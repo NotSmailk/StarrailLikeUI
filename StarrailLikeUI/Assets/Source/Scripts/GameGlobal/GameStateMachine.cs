@@ -7,10 +7,17 @@ public class GameStateMachine : MonoBehaviour
 {
     [Inject] private DiContainer _container;
     private IGameState _curState;
-    private IGameState _prevState;
     private Dictionary<Type, IGameState> _states = new Dictionary<Type, IGameState>();
+    private Stack<IGameState> _statesStack = new Stack<IGameState>();
 
-    public IGameState PrevState => _prevState;
+    public IGameState PrevState 
+    {
+        get
+        {
+            _statesStack.TryPeek(out IGameState state);
+            return state;
+        }
+    }
 
     public void Init()
     {
@@ -22,6 +29,7 @@ public class GameStateMachine : MonoBehaviour
         CreateAndAddState<GameInventoryState>();
         CreateAndAddState<GameSpinsMenuState>();
         CreateAndAddState<GameCharactersMenuState>();
+        CreateAndAddState<GameStoreBuyItemState>();
 
         _curState = _states[typeof(GameWorldState)];
         if (_curState is IStateEnterable enterable)
@@ -49,33 +57,48 @@ public class GameStateMachine : MonoBehaviour
 
     public async void SwitchState<TState>() where TState : IState<GameStateMachine>
     {
-        // Try to exit from previous state
         if (_curState is IStateExitable exitable)
             await exitable.Exit();
 
-        // Try to find new state
-        _prevState = _curState;
+        if (_statesStack.Count > 0)
+            _statesStack.Pop();
+
+        _statesStack.Push(_curState);
+
         if (_states.TryGetValue(typeof(TState), out IGameState state))
             _curState = state;
 
-        // Try to enter new state
+        if (_curState is IStateEnterable enterable)
+            await enterable.Enter();
+    }
+
+    public async void SwitchStateWithoutExit<TState>() where TState : IState<GameStateMachine>
+    {
+        _statesStack.Push(_curState);
+
+        if (_states.TryGetValue(typeof(TState), out IGameState state))
+            _curState = state;
+
         if (_curState is IStateEnterable enterable)
             await enterable.Enter();
     }
 
     public async void SwitchToPreviousState()
     {
-        // Try to exit from previous state
         if (_curState is IStateExitable exitable)
             await exitable.Exit();
 
-        // Try to find new state
-        var temp = _curState;
-        _curState = _prevState;
-        _prevState = temp;
-
-        // Try to enter new state
-        if (_curState is IStateEnterable enterable)
+        if (_statesStack.Peek() is IStateEnterable enterable)
             await enterable.Enter();
+
+        _curState = _statesStack.Pop();
+    }
+
+    public async void SwitchToPreviousWithoutEnter()
+    {
+        if (_curState is IStateExitable exitable)
+            await exitable.Exit();
+
+        _curState = _statesStack.Pop();
     }
 }

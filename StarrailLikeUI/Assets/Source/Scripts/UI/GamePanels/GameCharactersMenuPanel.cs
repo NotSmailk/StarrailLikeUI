@@ -11,6 +11,7 @@ public class GameCharactersMenuPanel : VanishingGamePanel
     [field: SerializeField] private CharactersMenuInfoPanel _charactersMenuInfoPanel;
     [field: SerializeField] private CharactersMenuSkillsPanel _charactersMenuSkillsPanel;
     [field: SerializeField] private Transform _viewpoint;
+    [field: SerializeField] private GameObject _podium;
 
     [Inject] private GameStateMachine _gameBehaviour;
     [Inject] private SquadData _squadData;
@@ -87,6 +88,7 @@ public class GameCharactersMenuPanel : VanishingGamePanel
     public override async Task ShowPanel(float duration)
     {
         CreateCharacters();
+        _podium?.SetActive(true);
         await base.ShowPanel(duration);
     }
 
@@ -106,6 +108,7 @@ public class GameCharactersMenuPanel : VanishingGamePanel
     public override async Task HidePanel(float duration)
     {
         DestroyCharacters();
+        _podium?.SetActive(false);
         await base.HidePanel(duration);
     }
 
