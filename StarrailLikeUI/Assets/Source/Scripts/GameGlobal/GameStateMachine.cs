@@ -30,6 +30,7 @@ public class GameStateMachine : MonoBehaviour
         CreateAndAddState<GameSpinsMenuState>();
         CreateAndAddState<GameCharactersMenuState>();
         CreateAndAddState<GameStoreBuyItemState>();
+        CreateAndAddState<GameItemViewMenuState>();
 
         _curState = _states[typeof(GameWorldState)];
         if (_curState is IStateEnterable enterable)
@@ -96,9 +97,10 @@ public class GameStateMachine : MonoBehaviour
 
     public async void SwitchToPreviousWithoutEnter()
     {
-        if (_curState is IStateExitable exitable)
-            await exitable.Exit();
-
+        var curState = _curState;
         _curState = _statesStack.Pop();
+
+        if (curState is IStateExitable exitable)
+            await exitable.Exit();
     }
 }

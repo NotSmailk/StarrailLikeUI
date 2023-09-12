@@ -6,6 +6,7 @@
         public static readonly string EXP_TEXT = "Exp";
         public static readonly string UID_TEXT = "UID";
         public static readonly string OWNED_TEXT = "Owned";
+        public static readonly string PRICE_TEXT = "Price";
     }
 
     public static class Paths

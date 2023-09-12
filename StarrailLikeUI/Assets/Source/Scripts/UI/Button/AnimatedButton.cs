@@ -6,17 +6,17 @@ using UnityEngine.UI;
 
 public class AnimatedButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
-    [field: SerializeField] private AnimatedButtonType _buttonType = AnimatedButtonType.Size;
-    [field: SerializeField] private float enterSizeCoef = 0.1f;
-    [field: SerializeField] private float clickSizeCoef = 0.15f;
-    [field: SerializeField] private Color enterColor = Color.gray;
-    [field: SerializeField] private Color clickColor = Color.gray;
+    [field: SerializeField] protected AnimatedButtonType _buttonType = AnimatedButtonType.Size;
+    [field: SerializeField] protected float enterSizeCoef = 0.1f;
+    [field: SerializeField] protected float clickSizeCoef = 0.15f;
+    [field: SerializeField] protected Color enterColor = Color.gray;
+    [field: SerializeField] protected Color clickColor = Color.gray;
 
-    private Color defaultColor;
-    private Vector2 defaultSize;
+    protected Color defaultColor;
+    protected Vector2 defaultSize;
     private RectTransform rect;
     private Image image;
-    private UnityEvent _onClick = new UnityEvent();
+    protected UnityEvent _onClick = new UnityEvent();
 
     private void Awake()
     {
@@ -27,17 +27,17 @@ public class AnimatedButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         defaultColor = image.color;
     }
 
-    public void Add(UnityAction action)
+    public virtual void Add(UnityAction action)
     {
         _onClick.AddListener(action);
     }
 
-    public void RemoveAll()
+    public virtual void RemoveAll()
     {
         _onClick.RemoveAllListeners();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public virtual void OnPointerClick(PointerEventData eventData)
     {        
         var size = defaultSize * (1 + clickSizeCoef);
         _onClick.Invoke();
@@ -65,7 +65,7 @@ public class AnimatedButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
         var size = rect.sizeDelta * (1 + enterSizeCoef);
 
@@ -84,7 +84,7 @@ public class AnimatedButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
         switch (_buttonType)
         {

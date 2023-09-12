@@ -27,6 +27,17 @@ public static class InventoryInfoExtension
         return false;
     }
 
+    public static int GetQuantity(this List<InventoryInfo> info, int id)
+    {
+        foreach (var item in info)
+        {
+            if (item.ItemId.Equals(id))
+                return item.Quantity;
+        }
+
+        return 0;
+    }
+
     public static void AddItem(this List<InventoryInfo> info, int id, int quantity)
     {
         foreach (var item in info)

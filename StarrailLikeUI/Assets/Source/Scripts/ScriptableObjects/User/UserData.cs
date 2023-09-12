@@ -16,4 +16,9 @@ public class UserData
     {
         inventory.AddItem(id, quantity);
     }
+
+    public int GetItemQuantity(int id)
+    {
+        return inventory.GetQuantity(id);
+    }
 }

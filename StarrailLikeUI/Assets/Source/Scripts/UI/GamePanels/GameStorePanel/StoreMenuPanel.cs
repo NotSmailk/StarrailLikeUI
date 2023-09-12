@@ -20,6 +20,8 @@ public class StoreMenuPanel : VerticalScrollablePanel
             item.Init(_collection.GetItem(slot.slot.ItemId), slot.slot.Price, slot.quantity);
             item.Add(() =>
             {
+                _collection.ItemToBuyId = slot.slot.ItemId;
+                _collection.ItemToBuyPrice = slot.slot.Price;
                 _gameStateMachine.SwitchStateWithoutExit<GameStoreBuyItemState>();
             });
         }

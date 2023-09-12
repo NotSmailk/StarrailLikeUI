@@ -46,8 +46,7 @@ public abstract class VanishingGamePanel : MonoBehaviour, IGameMenuPanel
     public virtual async Task HidePanel(float duration)
     {
         _panelImg.color = _defaultColor;
-        float alpha = 0;
-        var color = _defaultColor * new Color(1, 1, 1, alpha);
+        var color = _defaultColor * new Color(1, 1, 1, 0);
 
         _panelImg.DOColor(color, duration / 4);
         await Task.Delay((int)(duration * 1000));

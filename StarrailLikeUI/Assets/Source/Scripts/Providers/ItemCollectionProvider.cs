@@ -3,6 +3,9 @@ using UnityEngine;
 public class ItemCollectionProvider
 {
     private ItemDataCollection _collection;
+    public int ItemToBuyId { get; set; }
+    public int ItemToBuyPrice { get; set; }
+    public int ItemToShowId { get; set; }
 
     public ItemCollectionProvider()
     {
