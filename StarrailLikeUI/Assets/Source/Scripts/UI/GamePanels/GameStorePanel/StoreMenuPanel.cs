@@ -4,6 +4,7 @@ using Zenject;
 
 public class StoreMenuPanel : VerticalScrollablePanel
 {
+    [field: Header("Panel Parametres")]
     [field: SerializeField] private RectTransform _gridRect;
     [field: SerializeField] private TextMeshProUGUI _titleText;
     [field: SerializeField] private StoreSlotButton _slotPrefab;

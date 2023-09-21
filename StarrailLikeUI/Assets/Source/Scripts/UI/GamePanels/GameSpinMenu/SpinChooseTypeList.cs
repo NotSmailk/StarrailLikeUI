@@ -22,14 +22,4 @@ public class SpinChooseTypeList : ChooseTypeListPanel
         _selected = _buttons[0];
         _selected.Select();
     }
-
-    public void Clear()
-    {
-        foreach (var btn in _buttons)
-        {
-            btn.DestroyButton();
-        }
-
-        _buttons.Clear();
-    }
 }

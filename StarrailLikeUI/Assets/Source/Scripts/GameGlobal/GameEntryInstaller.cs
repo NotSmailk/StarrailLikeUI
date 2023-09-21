@@ -44,6 +44,9 @@ public class GameEntryInstaller : MonoInstaller
 
         var friendsProvider = new FriendsDataProvider(userProvider);
         Container.Bind<FriendsDataProvider>().FromInstance(friendsProvider).AsSingle().NonLazy();
+
+        var assignmentsProvider = new AssignmentsDataProvider();
+        Container.Bind<AssignmentsDataProvider>().FromInstance(assignmentsProvider).AsSingle().NonLazy();
     }
 
     private void BindCharacters()

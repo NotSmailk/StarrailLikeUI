@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf6cee7b0f24c104d9ad94c4f7d993e4, type: 3}
+  m_Name: New Assignments Data
+  m_EditorClassIdentifier: 
+  _assignments:
+  - _name: Medical training
+    _description: Provide your characters with new training sim to get expirience
+      in producing health packs.
+    _itemId: 0
+  - _name: Forge trip
+    _description: Provide your characters with new training sim to get expirience
+      in producing power ups.
+    _itemId: 1
+  - _name: Gacha drop
+    _description: New method to get free spins.
+    _itemId: 2

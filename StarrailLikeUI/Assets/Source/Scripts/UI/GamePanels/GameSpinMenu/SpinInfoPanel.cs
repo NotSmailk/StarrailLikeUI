@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SpinInfoPanel : VerticalScrollablePanel
 {
+    [field: Header("Panel Parametres")]
     [field: SerializeField] private Image _spinPreview;
     [field: SerializeField] private TextMeshProUGUI _spinName;
     [field: SerializeField] private TextMeshProUGUI _spinDescription;

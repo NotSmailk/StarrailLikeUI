@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class VerticalScrollablePanel : MonoBehaviour, IScrollablePanel
 {
+    [field: Header("Animation Parametres")]
     [field: SerializeField] protected RectTransform _rect;
     [field: SerializeField] protected float _yValueUp;
     [field: SerializeField] protected float _yValueShowed;

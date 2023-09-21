@@ -18,13 +18,4 @@ public class SpinInfoPanelList : VerticalScrollablePanelList
         _curPanel = _panels[0];
         _curPanel.ShowPanel(true);
     }
-    public void Clear()
-    {
-        foreach (var pnl in _panels)
-        {
-            pnl.DestroyPanel();
-        }
-
-        _panels.Clear();
-    }
 }

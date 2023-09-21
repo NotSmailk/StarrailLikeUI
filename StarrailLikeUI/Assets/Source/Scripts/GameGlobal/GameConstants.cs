@@ -14,5 +14,6 @@
         public static readonly string SPINS_PATH = "Spins/New Spins Data";
         public static readonly string STORE_PATH = "StoreData/";
         public static readonly string ITEM_COLLECTION_PATH = "New Item Collection";
+        public static readonly string ASSIGNMENTS_DATA_PATH = "Assignments/New Assignments Data";
     }
 }

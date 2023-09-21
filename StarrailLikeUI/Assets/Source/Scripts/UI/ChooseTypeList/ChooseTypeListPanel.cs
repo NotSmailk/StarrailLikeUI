@@ -15,4 +15,12 @@ public class ChooseTypeListPanel : MonoBehaviour, IChooseTypeList
         _selected = button;
         _selected.Select();
     }
+
+    public void Clear()
+    {
+        foreach (var btn in _buttons)
+            btn.DestroyButton();
+
+        _buttons.Clear();
+    }
 }

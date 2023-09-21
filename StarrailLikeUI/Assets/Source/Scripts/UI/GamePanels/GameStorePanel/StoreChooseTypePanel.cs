@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,13 +20,5 @@ public class StoreChooseTypePanel : ChooseTypeListPanel
     public void ChooseButton(int id)
     {
         ChooseButton(_buttons[id]);
-    }
-
-    public void Clear()
-    {
-        foreach (var btn in _buttons)
-            Destroy(btn.gameObject);
-
-        _buttons.Clear();
     }
 }
