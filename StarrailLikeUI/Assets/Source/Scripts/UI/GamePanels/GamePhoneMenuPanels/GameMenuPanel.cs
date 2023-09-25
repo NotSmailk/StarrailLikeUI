@@ -10,6 +10,8 @@ public class GameMenuPanel : MonoBehaviour, IGameMenuPanel
     [field: SerializeField] private float _xHiddenValue = 0f;
     [field: SerializeField] private float _xShowedValue = 0f;
 
+    public bool Enabled => _panel.gameObject.activeSelf;
+
     public void Init()
     {
         _systemMenuPanel.Init();

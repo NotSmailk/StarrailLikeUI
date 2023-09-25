@@ -45,6 +45,8 @@ public class StoreBuyItemPanel : VanishingGamePanel
             _itemCollectionProvider.ItemToShowId = id;
             _machine.SwitchStateWithoutExit<GameItemViewMenuState>();
         });
+        _buyButton.Add(() => _itemCollectionProvider.ItemsToGet.Add(id));
+        _buyButton.Add(() => _machine.SwitchStateWithoutPush<GameGetNewItemState>());
         _panelRect.gameObject.SetActive(true);
     }
 

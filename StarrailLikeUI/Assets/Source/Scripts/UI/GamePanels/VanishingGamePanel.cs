@@ -12,6 +12,8 @@ public abstract class VanishingGamePanel : MonoBehaviour, IGameMenuPanel
     protected float _alpha;
     protected Color _defaultColor;
 
+    public bool Enabled => _panelRect.gameObject.activeSelf;
+
     public virtual void Init()
     {
         _defaultColor = _panelImg.color;

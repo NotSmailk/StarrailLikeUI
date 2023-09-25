@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemCollectionProvider
@@ -6,9 +7,11 @@ public class ItemCollectionProvider
     public int ItemToBuyId { get; set; }
     public int ItemToBuyPrice { get; set; }
     public int ItemToShowId { get; set; }
+    public List<int> ItemsToGet { get; set; }
 
     public ItemCollectionProvider()
     {
+        ItemsToGet = new List<int>();
         _collection = Resources.Load<ItemDataCollection>(GameConstants.Paths.ITEM_COLLECTION_PATH);
     }
 

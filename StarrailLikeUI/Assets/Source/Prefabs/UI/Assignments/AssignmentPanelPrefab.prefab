@@ -856,10 +856,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rect: {fileID: 5112474418100233550}
-  _yValueUp: 2000
+  _yValueUp: 1000
   _yValueShowed: 0
-  _yValueDown: -2000
-  _animationDuration: 0.25
+  _yValueDown: -1000
+  _animationDuration: 0.1
   _assignmentName: {fileID: 5112474416398582956}
   _assignmentDescription: {fileID: 5112474416622377569}
   _itemSprite: {fileID: 6123521842460666013}

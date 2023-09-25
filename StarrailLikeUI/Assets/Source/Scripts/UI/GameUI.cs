@@ -15,6 +15,7 @@ public class GameUI : MonoBehaviour
     [field: SerializeField] private GameCharactersMenuPanel _gameCharactersMenuPanel;
     [field: SerializeField] private StoreBuyItemPanel _gameBuyItemPanel;
     [field: SerializeField] private GameItemViewPanel _gameItemViewPanel;
+    [field: SerializeField] private GameGetNewItemPanel _gameGetNewItemPanel;
     [field: SerializeField] private float _switchDuration = 0.3f;
 
     private Dictionary<Type, IGameMenuPanel> _panels = new Dictionary<Type, IGameMenuPanel>();
@@ -31,6 +32,7 @@ public class GameUI : MonoBehaviour
         _panels.Add(typeof(GameCharactersMenuPanel), _gameCharactersMenuPanel);
         _panels.Add(typeof(StoreBuyItemPanel), _gameBuyItemPanel);
         _panels.Add(typeof(GameItemViewPanel), _gameItemViewPanel);
+        _panels.Add(typeof(GameGetNewItemPanel), _gameGetNewItemPanel);
 
         foreach (var panel in _panels.Values)
         {

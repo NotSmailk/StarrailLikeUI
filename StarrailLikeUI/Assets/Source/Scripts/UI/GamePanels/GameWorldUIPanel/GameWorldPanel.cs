@@ -21,6 +21,8 @@ public class GameWorldPanel : MonoBehaviour, IGameMenuPanel
     [Inject] private SquadData _squadData;
     [Inject] private GameStateMachine _gameBehaviour;
 
+    public bool Enabled => _panel.gameObject.activeSelf;
+
     public void Init()
     {
         _openUIBtn.onClick.AddListener(_gameBehaviour.SwitchState<GamePhoneMenuState>);

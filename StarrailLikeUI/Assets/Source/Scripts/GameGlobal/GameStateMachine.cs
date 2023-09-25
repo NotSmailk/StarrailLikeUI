@@ -31,6 +31,7 @@ public class GameStateMachine : MonoBehaviour
         CreateAndAddState<GameCharactersMenuState>();
         CreateAndAddState<GameStoreBuyItemState>();
         CreateAndAddState<GameItemViewMenuState>();
+        CreateAndAddState<GameGetNewItemState>();
 
         _curState = _states[typeof(GameWorldState)];
         if (_curState is IStateEnterable enterable)
@@ -65,6 +66,18 @@ public class GameStateMachine : MonoBehaviour
             _statesStack.Pop();
 
         _statesStack.Push(_curState);
+
+        if (_states.TryGetValue(typeof(TState), out IGameState state))
+            _curState = state;
+
+        if (_curState is IStateEnterable enterable)
+            await enterable.Enter();
+    }
+
+    public async void SwitchStateWithoutPush<TState>() where TState : IState<GameStateMachine>
+    {
+        if (_curState is IStateExitable exitable)
+            await exitable.Exit();
 
         if (_states.TryGetValue(typeof(TState), out IGameState state))
             _curState = state;

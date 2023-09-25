@@ -22,6 +22,11 @@ public class AssignmentPanel : VerticalScrollablePanel
         _assignmentDescription.text = data.Description;
         _itemSprite.sprite = _itemCollectionProvider.GetItem(data.ItemId).Sprite;
         _itemShowButton.Add(() => { ItemShow(data.ItemId); });
+        _dispatchButton.Add(() => 
+        {
+            _itemCollectionProvider.ItemsToGet.Add(data.ItemId);
+            _machine.SwitchStateWithoutExit<GameGetNewItemState>(); 
+        });
     }
 
     public void ItemShow(int id)

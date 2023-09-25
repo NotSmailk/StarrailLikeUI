@@ -18,34 +18,38 @@ public class AnimatedButtonBorders : AnimatedButton, IPointerEnterHandler, IPoin
 
     public override async void OnPointerClick(PointerEventData eventData)
     {
-        _image.maskable = false;
-        var size = defaultSize * (1 + clickSizeCoef);
-        _onClick.Invoke();
-
-        switch (_buttonType)
+        try
         {
-            case AnimatedButtonType.Size:
-                DOTween.Sequence().
-                    Append(_rect.DOSizeDelta(size, 0.05f)).
-                    Append(_rect.DOSizeDelta(defaultSize, 0.05f));
-                break;
-            case AnimatedButtonType.Color:
-                DOTween.Sequence().
-                    Append(_image.DOColor(clickColor, 0.05f)).
-                    Append(_image.DOColor(defaultColor, 0.05f));
-                break;
-            case AnimatedButtonType.ColorAndSize:
-                DOTween.Sequence().
-                    Append(_rect.DOSizeDelta(size, 0.05f)).
-                    Append(_rect.DOSizeDelta(defaultSize, 0.05f));
-                DOTween.Sequence().
-                    Append(_image.DOColor(clickColor, 0.05f)).
-                    Append(_image.DOColor(defaultColor, 0.05f));
-                break;
-        }
+            _image.maskable = false;
+            var size = defaultSize * (1 + clickSizeCoef);
+            _onClick.Invoke();
 
-        await Task.Delay(100);
-        _image.maskable = true;
+            switch (_buttonType)
+            {
+                case AnimatedButtonType.Size:
+                    DOTween.Sequence().
+                        Append(_rect.DOSizeDelta(size, 0.05f)).
+                        Append(_rect.DOSizeDelta(defaultSize, 0.05f));
+                    break;
+                case AnimatedButtonType.Color:
+                    DOTween.Sequence().
+                        Append(_image.DOColor(clickColor, 0.05f)).
+                        Append(_image.DOColor(defaultColor, 0.05f));
+                    break;
+                case AnimatedButtonType.ColorAndSize:
+                    DOTween.Sequence().
+                        Append(_rect.DOSizeDelta(size, 0.05f)).
+                        Append(_rect.DOSizeDelta(defaultSize, 0.05f));
+                    DOTween.Sequence().
+                        Append(_image.DOColor(clickColor, 0.05f)).
+                        Append(_image.DOColor(defaultColor, 0.05f));
+                    break;
+            }
+
+            await Task.Delay(100);
+            _image.maskable = true;
+        }
+        catch { }
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
@@ -70,20 +74,25 @@ public class AnimatedButtonBorders : AnimatedButton, IPointerEnterHandler, IPoin
 
     public override async void OnPointerExit(PointerEventData eventData)
     {
-        switch (_buttonType)
+        try
         {
-            case AnimatedButtonType.Size:
-                _rect.DOSizeDelta(defaultSize, 0.1f);
-                break;
-            case AnimatedButtonType.Color:
-                _image.DOColor(defaultColor, 0.1f);
-                break;
-            case AnimatedButtonType.ColorAndSize:
-                _rect.DOSizeDelta(defaultSize, 0.1f);
-                _image.DOColor(defaultColor, 0.1f);
-                break;
-        }
-        await Task.Delay(100);
-        _image.maskable = true;
+            switch (_buttonType)
+            {
+                case AnimatedButtonType.Size:
+                    _rect.DOSizeDelta(defaultSize, 0.1f);
+                    break;
+                case AnimatedButtonType.Color:
+                    _image.DOColor(defaultColor, 0.1f);
+                    break;
+                case AnimatedButtonType.ColorAndSize:
+                    _rect.DOSizeDelta(defaultSize, 0.1f);
+                    _image.DOColor(defaultColor, 0.1f);
+                    break;
+            }
+            await Task.Delay(100);
+
+            _image.maskable = true;
+        } 
+        catch { }
     }
 }
