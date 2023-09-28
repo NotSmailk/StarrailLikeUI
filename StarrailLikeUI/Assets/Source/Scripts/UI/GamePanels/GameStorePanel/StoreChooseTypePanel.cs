@@ -1,15 +1,18 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class StoreChooseTypePanel : ChooseTypeListPanel
 {
     [field: SerializeField] private RectTransform _chooseRect;
     [field: SerializeField] private ChooseTypeButton _storeChoosePrefab;
 
+    [Inject] private DiContainer _container;
+
     public void CreateButton(StoreData store, UnityAction action)
     {
-        var btn = Instantiate(_storeChoosePrefab, _chooseRect);
+        var btn = _container.InstantiatePrefab(_storeChoosePrefab, _chooseRect).GetComponent<ChooseTypeButton>();
         btn.Init();
         btn.Add(() => { ChooseButton(btn); });
         btn.Add(action);

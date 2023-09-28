@@ -66,7 +66,9 @@ public class GameWorldState : IGameState, IStateEnterable, IStateExitable
 
     private void SetAcitveCharacter(int id)
     {
-        _gameUI.SetActiveCharacter(id);
-        _characters.SetActiveCharater(id);
+        if (_characters.SetActiveCharater(id))
+        {
+            _gameUI.SetActiveCharacter(id);
+        }
     }
 }

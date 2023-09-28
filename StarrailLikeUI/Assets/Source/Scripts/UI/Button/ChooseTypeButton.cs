@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 public class ChooseTypeButton : AnimatedChooseButton
 {
@@ -19,6 +20,9 @@ public class ChooseTypeButton : AnimatedChooseButton
     protected Color _defaultColor;
     protected bool _isSelected = false;
     protected UnityEvent _onClick = new UnityEvent();
+    protected bool _clicked = false;
+
+    [Inject] private GameUI _ui;
 
     public virtual void Init()
     {
@@ -54,6 +58,16 @@ public class ChooseTypeButton : AnimatedChooseButton
     public override void OnPointerClick(PointerEventData eventData)
     {
         _onClick.Invoke();
+
+        if (_clicked)
+        {
+            _clicked = false;
+        }
+        else
+        {
+            _ui.PlayClick();
+            _clicked = true;
+        }
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
@@ -63,6 +77,7 @@ public class ChooseTypeButton : AnimatedChooseButton
 
         try
         {
+            _ui.PlayHover();
             var size = _rect.sizeDelta * (1 + _enterSizeCoef);
             _rect.DOSizeDelta(size, _duration);
             _image.DOColor(_enterColor, _duration);
@@ -78,6 +93,7 @@ public class ChooseTypeButton : AnimatedChooseButton
         {
             _rect.DOSizeDelta(_defaultSize, _duration);
             _image.DOColor(_defaultColor, _duration);
+            _clicked = false;
         } catch { }
     }
 }

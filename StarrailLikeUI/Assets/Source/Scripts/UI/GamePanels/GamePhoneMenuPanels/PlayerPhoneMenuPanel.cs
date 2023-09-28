@@ -10,8 +10,9 @@ public class PlayerPhoneMenuPanel : MonoBehaviour
         _phoneButtonsPanel.Init();
     }
 
-    public void ShowPanel()
+    public void ShowPanel(bool show)
     {
+        _phoneButtonsPanel.Interactble(show);
         _playerInfoPanel.ShowPanel();
     }
 

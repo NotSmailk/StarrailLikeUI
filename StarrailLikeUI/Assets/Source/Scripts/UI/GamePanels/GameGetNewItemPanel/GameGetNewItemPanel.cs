@@ -12,6 +12,7 @@ public class GameGetNewItemPanel : VanishingGamePanel
 
     [Inject] private ItemCollectionProvider _provider;
     [Inject] private GameStateMachine _machine;
+    [Inject] protected DiContainer _container;
 
     private List<ItemViewButton> _itemButtons = new List<ItemViewButton>();
 
@@ -39,7 +40,7 @@ public class GameGetNewItemPanel : VanishingGamePanel
     {
         foreach (var itemId in _provider.ItemsToGet)
         {
-            var btn = Instantiate(_buttonPrefab, _content);
+            var btn = _container.InstantiatePrefab(_buttonPrefab, _content).GetComponent<ItemViewButton>();
             var item = _provider.GetItem(itemId);
             btn.Init(item.Sprite, item.Name);
             btn.Add(() =>

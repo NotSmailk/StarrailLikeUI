@@ -20,7 +20,7 @@ public class GameMenuPanel : MonoBehaviour, IGameMenuPanel
 
     public async Task ShowPanel(bool activity, float duration)
     {
-        await  ShowPanelWithTime(activity, duration);
+        await ShowPanelWithTime(activity, duration);
     }
 
     public void ShowPanelForce(bool activity)
@@ -38,7 +38,7 @@ public class GameMenuPanel : MonoBehaviour, IGameMenuPanel
 
     private async Task ShowPanelWithTime(bool activity, float duration)
     {
-        _playerInfoPanel.ShowPanel();
+        _playerInfoPanel.ShowPanel(activity);
         var xValue = activity ? _xShowedValue : _xHiddenValue;
         _panel.DOAnchorPosX(xValue, duration);
 

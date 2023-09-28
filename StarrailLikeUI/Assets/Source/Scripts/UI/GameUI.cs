@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
+[RequireComponent(typeof(AudioSource))]
 public class GameUI : MonoBehaviour
 {
     [field: SerializeField] private GameWorldPanel _gameWorldPanel;
@@ -18,10 +20,17 @@ public class GameUI : MonoBehaviour
     [field: SerializeField] private GameGetNewItemPanel _gameGetNewItemPanel;
     [field: SerializeField] private float _switchDuration = 0.3f;
 
+    [Inject] private GameSettings _settings;
+    [Inject] private SoundDataProvider _soundDataProvider;
+
     private Dictionary<Type, IGameMenuPanel> _panels = new Dictionary<Type, IGameMenuPanel>();
+    private AudioSource _audioSource;
 
     public void Init()
     {
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.volume = _settings.Volume;
+
         _panels.Add(typeof(GameWorldPanel), _gameWorldPanel);
         _panels.Add(typeof(GameMenuPanel), _gameMenuPanel);
         _panels.Add(typeof(GameStorePanel), _gameShopPanel);
@@ -55,5 +64,22 @@ public class GameUI : MonoBehaviour
     public void SetActiveCharacter(int id)
     {
         _gameWorldPanel.SetActiveCharacter(id);
+        PlayClip(_soundDataProvider.Data.Game.ChangeCharacter);
+    }
+
+    private void PlayClip(AudioClip clip)
+    {
+        _audioSource.clip = clip;
+        _audioSource.Play();
+    }
+
+    public void PlayClick()
+    {
+        PlayClip(_soundDataProvider.Data.UI.Click);
+    }
+
+    public void PlayHover()
+    {
+        PlayClip(_soundDataProvider.Data.UI.Hover);
     }
 }

@@ -24,6 +24,16 @@ public class AnimatedButtonBorders : AnimatedButton, IPointerEnterHandler, IPoin
             var size = defaultSize * (1 + clickSizeCoef);
             _onClick.Invoke();
 
+            if (_clicked)
+            {
+                _clicked = false;
+            }
+            else
+            {
+                _ui.PlayClick();
+                _clicked = true;
+            }
+
             switch (_buttonType)
             {
                 case AnimatedButtonType.Size:
@@ -56,6 +66,7 @@ public class AnimatedButtonBorders : AnimatedButton, IPointerEnterHandler, IPoin
     {
         _image.maskable = false;
         var size = _rect.sizeDelta * (1 + enterSizeCoef);
+        _ui.PlayHover();
 
         switch (_buttonType)
         {

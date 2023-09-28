@@ -4,6 +4,7 @@ using Zenject;
 public class GameEntryInstaller : MonoInstaller
 {
     [field: SerializeField] private string _username = "Default";
+    [field: SerializeField] private GameSettings _settings;
     [field: SerializeField] private GameCharacters _characters;
     [field: SerializeField] private GameStateMachine _gameBehaviour;
     [field: SerializeField] private GameCamera _camera;
@@ -11,6 +12,8 @@ public class GameEntryInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        BindSettings();
+
         BindStateMachine();
 
         BindProviders();
@@ -47,6 +50,14 @@ public class GameEntryInstaller : MonoInstaller
 
         var assignmentsProvider = new AssignmentsDataProvider();
         Container.Bind<AssignmentsDataProvider>().FromInstance(assignmentsProvider).AsSingle().NonLazy();
+
+        var soundProvider = new SoundDataProvider();
+        Container.Bind<SoundDataProvider>().FromInstance(soundProvider).AsSingle().NonLazy();
+    }
+
+    private void BindSettings()
+    {
+        Container.Bind<GameSettings>().FromInstance(_settings).AsSingle().NonLazy();
     }
 
     private void BindCharacters()

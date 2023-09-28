@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
+using static Zenject.CheatSheet;
 
 public class AnimatedButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
@@ -17,6 +19,9 @@ public class AnimatedButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private RectTransform rect;
     private Image image;
     protected UnityEvent _onClick = new UnityEvent();
+    protected bool _clicked = false;
+
+    [Inject] protected GameUI _ui;
 
     private void Awake()
     {
@@ -41,6 +46,16 @@ public class AnimatedButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {        
         var size = defaultSize * (1 + clickSizeCoef);
         _onClick.Invoke();
+
+        if (_clicked)
+        {
+            _clicked = false;
+        }
+        else
+        {
+            _ui.PlayClick();
+            _clicked = true;
+        }
 
         switch (_buttonType)
         {
@@ -67,7 +82,11 @@ public class AnimatedButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
+        if (!image.raycastTarget)
+            return;
+
         var size = rect.sizeDelta * (1 + enterSizeCoef);
+        _ui.PlayHover();
 
         switch (_buttonType)
         {

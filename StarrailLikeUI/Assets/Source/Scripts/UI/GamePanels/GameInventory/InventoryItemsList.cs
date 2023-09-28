@@ -9,6 +9,7 @@ public class InventoryItemsList : ChooseTypeListPanel
     [field: SerializeField] private RectTransform _contentTransform;
 
     [Inject] private ItemCollectionProvider _provider;
+    [Inject] private DiContainer _container;
 
     private UnityEvent<ItemData, int> _showData = new UnityEvent<ItemData, int>();
 
@@ -16,7 +17,7 @@ public class InventoryItemsList : ChooseTypeListPanel
     {
         foreach (var item in inventory)
         {
-            var itemSlot = Instantiate(_slotPrefab, _contentTransform);
+            var itemSlot = _container.InstantiatePrefab(_slotPrefab, _contentTransform).GetComponent<InventoryItemSlot>();
             itemSlot.Init(_provider.GetItem(item.ItemId), item.Quantity);
             itemSlot.Add(() => { ChooseButton(itemSlot); });
             itemSlot.Add(() => { _showData.Invoke(_provider.GetItem(item.ItemId), item.Quantity); });

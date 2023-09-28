@@ -26,18 +26,20 @@ public class GameCharacters : MonoBehaviour
         SetActiveCharater(0);
     }
 
-    public void SetActiveCharater(int id)
+    public bool SetActiveCharater(int id)
     {
         if (id < 0 || id >= _characters.Count)
-            return;
+            return false;
 
         if (_characters.IndexOf(_curCharacter).Equals(id))
-            return;
+            return false;
 
         _curCharacter?.gameObject.SetActive(false);
         _curCharacter = _characters[id];
         _curCharacter.gameObject.SetActive(true);
         _curCharacter.EnterWorldMode();
+
+        return true;
     }
 
     public void ActivatePhoneMode()
