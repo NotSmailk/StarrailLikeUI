@@ -17,3 +17,4 @@ MonoBehaviour:
     _hover: {fileID: 8300000, guid: 0994c12e202f342459a4212e7287f7e8, type: 3}
   _game:
     _changeCharacter: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
+    _getNewItem: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}

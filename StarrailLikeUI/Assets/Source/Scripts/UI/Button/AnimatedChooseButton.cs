@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class AnimatedChooseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler
+public abstract class AnimatedChooseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        OnPointerClick(eventData);
-    }
-
+    public abstract void OnPointerDown(PointerEventData eventData);
     public abstract void OnPointerEnter(PointerEventData eventData);
 
     public abstract void OnPointerExit(PointerEventData eventData);
-    public abstract void OnPointerClick(PointerEventData eventData);
+    public abstract void OnPointerUp(PointerEventData eventData);
 }

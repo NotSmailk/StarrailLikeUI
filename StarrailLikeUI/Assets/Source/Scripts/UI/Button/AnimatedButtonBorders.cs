@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AnimatedButtonBorders : AnimatedButton, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
+public class AnimatedButtonBorders : AnimatedButton
 {
     [field: Header("Border Parametres")]
     [field: SerializeField] private RectTransform _rect;
@@ -14,52 +14,6 @@ public class AnimatedButtonBorders : AnimatedButton, IPointerEnterHandler, IPoin
     {
         defaultSize = _rect.sizeDelta;
         defaultColor = _image.color;
-    }
-
-    public override async void OnPointerClick(PointerEventData eventData)
-    {
-        try
-        {
-            _image.maskable = false;
-            var size = defaultSize * (1 + clickSizeCoef);
-            _onClick.Invoke();
-
-            if (_clicked)
-            {
-                _clicked = false;
-            }
-            else
-            {
-                _ui.PlayClick();
-                _clicked = true;
-            }
-
-            switch (_buttonType)
-            {
-                case AnimatedButtonType.Size:
-                    DOTween.Sequence().
-                        Append(_rect.DOSizeDelta(size, 0.05f)).
-                        Append(_rect.DOSizeDelta(defaultSize, 0.05f));
-                    break;
-                case AnimatedButtonType.Color:
-                    DOTween.Sequence().
-                        Append(_image.DOColor(clickColor, 0.05f)).
-                        Append(_image.DOColor(defaultColor, 0.05f));
-                    break;
-                case AnimatedButtonType.ColorAndSize:
-                    DOTween.Sequence().
-                        Append(_rect.DOSizeDelta(size, 0.05f)).
-                        Append(_rect.DOSizeDelta(defaultSize, 0.05f));
-                    DOTween.Sequence().
-                        Append(_image.DOColor(clickColor, 0.05f)).
-                        Append(_image.DOColor(defaultColor, 0.05f));
-                    break;
-            }
-
-            await Task.Delay(100);
-            _image.maskable = true;
-        }
-        catch { }
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
@@ -104,6 +58,35 @@ public class AnimatedButtonBorders : AnimatedButton, IPointerEnterHandler, IPoin
 
             _image.maskable = true;
         } 
+        catch { }
+    }
+
+    public async override void OnPointerDown(PointerEventData eventData)
+    {
+        try
+        {
+            _image.maskable = false;
+            var size = defaultSize * (1 + clickSizeCoef);
+            _onClick.Invoke();
+            _ui.PlayClick();
+
+            switch (_buttonType)
+            {
+                case AnimatedButtonType.Size:
+                    _rect.DOSizeDelta(size, 0.1f);
+                    break;
+                case AnimatedButtonType.Color:
+                    _image.DOColor(clickColor, 0.1f);
+                    break;
+                case AnimatedButtonType.ColorAndSize:
+                    _rect.DOSizeDelta(size, 0.1f);
+                    _image.DOColor(clickColor, 0.1f);
+                    break;
+            }
+
+            await Task.Delay(100);
+            _image.maskable = true;
+        }
         catch { }
     }
 }

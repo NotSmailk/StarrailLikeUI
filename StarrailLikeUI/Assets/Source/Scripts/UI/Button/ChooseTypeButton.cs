@@ -55,21 +55,6 @@ public class ChooseTypeButton : AnimatedChooseButton
         Destroy(gameObject);
     }
 
-    public override void OnPointerClick(PointerEventData eventData)
-    {
-        _onClick.Invoke();
-
-        if (_clicked)
-        {
-            _clicked = false;
-        }
-        else
-        {
-            _ui.PlayClick();
-            _clicked = true;
-        }
-    }
-
     public override void OnPointerEnter(PointerEventData eventData)
     {
         if (_isSelected)
@@ -95,5 +80,16 @@ public class ChooseTypeButton : AnimatedChooseButton
             _image.DOColor(_defaultColor, _duration);
             _clicked = false;
         } catch { }
+    }
+
+    public override void OnPointerDown(PointerEventData eventData)
+    {
+        _onClick.Invoke();
+        _ui.PlayClick();
+    }
+
+    public override void OnPointerUp(PointerEventData eventData)
+    {
+        OnPointerExit(eventData);
     }
 }

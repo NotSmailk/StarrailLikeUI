@@ -67,7 +67,7 @@ public class GameUI : MonoBehaviour
         PlayClip(_soundDataProvider.Data.Game.ChangeCharacter);
     }
 
-    private void PlayClip(AudioClip clip)
+    public void PlayClip(AudioClip clip)
     {
         _audioSource.clip = clip;
         _audioSource.Play();

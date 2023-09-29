@@ -8,6 +8,7 @@ public class CharacterViewChooseList : MonoBehaviour
     [field: SerializeField] private CharacterSelectButton _buttonPrefab;
 
     [Inject] private CharactersDataProvider _charactersDataProvider;
+    [Inject] private DiContainer _container;
 
     private Dictionary<int, CharacterSelectButton> _buttons = new Dictionary<int, CharacterSelectButton>();
     private CharacterSelectButton _selectedButton;
@@ -19,7 +20,7 @@ public class CharacterViewChooseList : MonoBehaviour
         {
             _onChoose.AddListener(chooseCharacter);
             var character = _charactersDataProvider.GetCharacter(item);
-            var icon = Instantiate(_buttonPrefab, transform);
+            var icon = _container.InstantiatePrefab(_buttonPrefab, transform).GetComponent<CharacterSelectButton>();
             _buttons.Add(squad.Squad.IndexOf(item), icon);
             icon.Init(ChooseCharacter, squad.Squad.IndexOf(item), character.Avatar);
         }

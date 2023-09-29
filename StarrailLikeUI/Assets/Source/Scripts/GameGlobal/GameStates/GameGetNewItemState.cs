@@ -5,6 +5,7 @@ using Zenject;
 public class GameGetNewItemState : IGameState, IStateEnterable, IStateExitable
 {
     [Inject] private GameUI _gameUI;
+    [Inject] private SoundDataProvider _soundProvider;
 
     public GameStateMachine Initializer { get; set; }
     public bool Entered = false;
@@ -16,6 +17,7 @@ public class GameGetNewItemState : IGameState, IStateEnterable, IStateExitable
 
     public async Task Enter()
     {
+        _gameUI.PlayClip(_soundProvider.Data.Game.GetNewItem);
         await _gameUI.ShowPanel<GameGetNewItemPanel>(true);
         Entered = true;
     }

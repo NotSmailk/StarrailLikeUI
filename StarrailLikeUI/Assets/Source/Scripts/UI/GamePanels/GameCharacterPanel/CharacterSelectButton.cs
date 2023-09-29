@@ -3,10 +3,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 public class CharacterSelectButton : AnimatedChooseButton
 {
-    [field: SerializeField] private Button _button;
+    [field: SerializeField] private RectTransform _rect;
     [field: SerializeField] private Image _icon;
     [field: SerializeField] private float enterSizeCoef = 0.1f;
     [field: SerializeField] private float clickSizeCoef = 0.15f;
@@ -15,6 +16,8 @@ public class CharacterSelectButton : AnimatedChooseButton
     private int _id;
     private bool _isSelected = false;
     private UnityEvent<int> _onClick = new UnityEvent<int>();
+
+    [Inject] GameUI _ui;
 
     public void Init(UnityAction<int> chooseCharacter, int id, Sprite icon)
     {
@@ -27,26 +30,14 @@ public class CharacterSelectButton : AnimatedChooseButton
     public void Select()
     {
         _isSelected = true;
-        foreach (RectTransform rect in transform)
-        {
-            var size = _defaultSize * (1 + clickSizeCoef);
-            rect.DOSizeDelta(size, 0.05f);
-        }
+        var size = _defaultSize * (1 + clickSizeCoef);
+        _rect.DOSizeDelta(size, 0.05f);
     }
 
     public void Deselect()
     {
         _isSelected = false;
-        foreach (RectTransform rect in transform)
-        {
-            var size = _defaultSize * (1 + clickSizeCoef);
-            rect.DOSizeDelta(_defaultSize, 0.05f);
-        }
-    }
-
-    public override void OnPointerClick(PointerEventData eventData)
-    {
-        _onClick.Invoke(_id);
+        _rect.DOSizeDelta(_defaultSize, 0.05f);
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
@@ -54,12 +45,9 @@ public class CharacterSelectButton : AnimatedChooseButton
         if (_isSelected)
             return;
 
-        foreach (RectTransform rect in transform)
-        {
-            var size = rect.sizeDelta * (1 + enterSizeCoef);
-
-            rect.DOSizeDelta(size, 0.1f);
-        }
+        _ui.PlayHover();
+        var size = _rect.sizeDelta * (1 + enterSizeCoef);
+        _rect.DOSizeDelta(size, 0.1f);
     }
 
     public override void OnPointerExit(PointerEventData eventData)
@@ -67,9 +55,17 @@ public class CharacterSelectButton : AnimatedChooseButton
         if (_isSelected)
             return;
 
-        foreach (RectTransform rect in transform)
-        {
-            rect.DOSizeDelta(_defaultSize, 0.1f);
-        }
+        _rect.DOSizeDelta(_defaultSize, 0.1f);
+    }
+
+    public override void OnPointerDown(PointerEventData eventData)
+    {
+        _onClick.Invoke(_id);
+        _ui.PlayClick();
+    }
+
+    public override void OnPointerUp(PointerEventData eventData)
+    {
+        OnPointerExit(eventData);
     }
 }

@@ -18092,7 +18092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _username: Test
   _settings:
-    _volume: 0.25
+    _volume: 0.1
   _characters: {fileID: 717513265}
   _gameBehaviour: {fileID: 2060370350}
   _camera: {fileID: 963194229}
